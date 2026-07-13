@@ -227,6 +227,12 @@ claude mcp add hello-rust -- docker run -i --rm -e MCP_TRANSPORT=stdio ghcr.io/m
 
 (Pin a version like `:0.1.0` in place of `:latest` for a reproducible setup.)
 
+> **Note:** stdio uses stdin/stdout, not the network — no `-p` port mapping is
+> needed. Do **not** add `-t` (allocate a TTY): a TTY line-buffers and mangles
+> the JSON-RPC stream, so use `-i` alone. Docker pulls the image on first run;
+> the same command works with the Docker Hub image
+> (`mitchallen/mcp-hello-rust-server:latest`).
+
 ### Option B — Long-running container over HTTP
 
 The image serves HTTP by default. Start it once, then point an HTTP-capable
