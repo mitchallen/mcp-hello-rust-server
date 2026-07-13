@@ -11,7 +11,7 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
@@ -27,7 +27,7 @@ jobs:
         run: docker buildx build --load -t mcp-hello-rust-server:scan .
 
       - name: Trivy scan (fail on fixable CRITICAL/HIGH before push)
-        uses: aquasecurity/trivy-action@0.29.0
+        uses: aquasecurity/trivy-action@0.36.0
         with:
           image-ref: mcp-hello-rust-server:scan
           format: table

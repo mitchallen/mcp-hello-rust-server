@@ -15,7 +15,7 @@ jobs:
       contents: read
       security-events: write # required to upload SARIF to the Security tab
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
@@ -29,7 +29,7 @@ jobs:
       # Gate: fail the build on FIXABLE critical/high vulns. ignore-unfixed
       # means an upstream CVE with no patch yet won't wedge every build.
       - name: Trivy scan (fail on fixable CRITICAL/HIGH)
-        uses: aquasecurity/trivy-action@0.29.0
+        uses: aquasecurity/trivy-action@0.36.0
         with:
           image-ref: mcp-hello-rust-server:scan
           format: table
@@ -41,7 +41,7 @@ jobs:
       # tab for visibility, even when the gate above passes.
       - name: Trivy scan (SARIF report, all severities)
         if: always()
-        uses: aquasecurity/trivy-action@0.29.0
+        uses: aquasecurity/trivy-action@0.36.0
         with:
           image-ref: mcp-hello-rust-server:scan
           format: sarif
