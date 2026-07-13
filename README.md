@@ -17,7 +17,8 @@ Built with **Rust**, **[rmcp](https://crates.io/crates/rmcp)**, **cargo**, and
 [`mcp-hello-server`](../mcp-hello-server), following the official MCP
 [Build a server (Rust)](https://modelcontextprotocol.io/docs/develop/build-server#rust)
 reference. The Docker image is a fully-static binary on a distroless base — about
-**10 MB** and **0 known vulnerabilities**.
+**10 MB** uncompressed (~2 MB compressed on the registry) and **0 known
+vulnerabilities**.
 
 * * *
 
@@ -267,7 +268,8 @@ over **streamable HTTP** by default (`MCP_TRANSPORT=http`, `HOST=0.0.0.0`,
 
 The build compiles a **fully-static musl binary** on `rust:1-alpine` and copies
 it onto a distroless **[Chainguard/Wolfi](https://images.chainguard.dev) `static`
-base** — no shell, no package manager, runs as a non-root user, ~10 MB, and scans
+base** — no shell, no package manager, runs as a non-root user, ~10 MB
+uncompressed (~2 MB compressed), and scans
 **0 known vulnerabilities**. Every build is gated by a Trivy scan (fails on
 fixable CRITICAL/HIGH); the Rust dependency tree is separately scanned with
 `cargo-audit`, and the published `:latest` is re-scanned daily — see
