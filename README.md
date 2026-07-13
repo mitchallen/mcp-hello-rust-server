@@ -31,13 +31,13 @@ and the published Docker image (nothing to build or install).
 to it over stdio:
 
 ```sh
-claude mcp add hello -- docker run -i --rm -e MCP_TRANSPORT=stdio ghcr.io/mitchallen/mcp-hello-rust-server:latest
+claude mcp add hello-rust -- docker run -i --rm -e MCP_TRANSPORT=stdio ghcr.io/mitchallen/mcp-hello-rust-server:latest
 ```
 
 **2. Confirm it connected:**
 
 ```sh
-claude mcp list        # "hello" should report ✔ Connected
+claude mcp list        # "hello-rust" should report ✔ Connected
 ```
 
 **3. Ask in plain language** — Claude discovers the tools and picks one (the tool
@@ -54,13 +54,13 @@ getting structured JSON back — *is* MCP.
 **4. Remove it when you're done:**
 
 ```sh
-claude mcp remove hello
+claude mcp remove hello-rust
 ```
 
 > **Prefer HTTP?** Run it as a long-lived server instead:
 > ```sh
 > docker run --rm -p 8000:8000 ghcr.io/mitchallen/mcp-hello-rust-server:latest
-> claude mcp add --transport http hello http://localhost:8000/mcp
+> claude mcp add --transport http hello-rust http://localhost:8000/mcp
 > ```
 
 * * *
@@ -158,7 +158,7 @@ binary. With Claude Code, from the project directory:
 
 ```sh
 make build
-claude mcp add hello -- "$PWD/target/release/mcp-hello-rust-server"
+claude mcp add hello-rust -- "$PWD/target/release/mcp-hello-rust-server"
 ```
 
 Confirm it's connected with `claude mcp list` (or `/mcp` inside a session).
@@ -192,7 +192,7 @@ HTTP:
 ```jsonc
 {
   "mcpServers": {
-    "hello": {
+    "hello-rust": {
       "command": "docker",
       "args": ["run", "-i", "--rm", "-e", "MCP_TRANSPORT=stdio",
                "ghcr.io/mitchallen/mcp-hello-rust-server:latest"]
@@ -204,7 +204,7 @@ HTTP:
 Claude Code equivalent:
 
 ```sh
-claude mcp add hello -- docker run -i --rm -e MCP_TRANSPORT=stdio ghcr.io/mitchallen/mcp-hello-rust-server:latest
+claude mcp add hello-rust -- docker run -i --rm -e MCP_TRANSPORT=stdio ghcr.io/mitchallen/mcp-hello-rust-server:latest
 ```
 
 (Pin a version like `:0.1.0` in place of `:latest` for a reproducible setup.)
@@ -215,8 +215,8 @@ The image serves HTTP by default. Start it once, then point an HTTP-capable
 client at it:
 
 ```sh
-docker run -d --rm -p 8000:8000 --name mcp-hello ghcr.io/mitchallen/mcp-hello-rust-server:latest
-claude mcp add --transport http hello http://localhost:8000/mcp
+docker run -d --rm -p 8000:8000 --name mcp-hello-rust ghcr.io/mitchallen/mcp-hello-rust-server:latest
+claude mcp add --transport http hello-rust http://localhost:8000/mcp
 ```
 
 For clients that only speak **stdio**, bridge to the HTTP endpoint with
@@ -225,7 +225,7 @@ For clients that only speak **stdio**, bridge to the HTTP endpoint with
 ```jsonc
 {
   "mcpServers": {
-    "hello": {
+    "hello-rust": {
       "command": "npx",
       "args": ["-y", "mcp-remote", "http://localhost:8000/mcp"]
     }
@@ -260,7 +260,7 @@ fixable CRITICAL/HIGH); the Rust dependency tree is separately scanned with
 
 ```sh
 docker pull ghcr.io/mitchallen/mcp-hello-rust-server:latest
-docker run --rm -p 8000:8000 --name mcp-hello ghcr.io/mitchallen/mcp-hello-rust-server:latest
+docker run --rm -p 8000:8000 --name mcp-hello-rust ghcr.io/mitchallen/mcp-hello-rust-server:latest
 ```
 
 Then connect an HTTP MCP client to `http://localhost:8000/mcp`.
