@@ -350,6 +350,33 @@ make release BUMP=minor   # or minor / major
 The target refuses to run unless the working tree is clean, you're on `main`, and
 `CHANGELOG.md` already has a `## [X.Y.Z]` section for the new version.
 
+### Docker Hub secrets (one-time setup)
+
+Pushing to **GHCR** needs no setup — it uses the built-in `GITHUB_TOKEN`. The
+**`publish-dockerhub`** job additionally needs two repository secrets and a
+pre-created Docker Hub repo:
+
+1. **Create a Docker Hub access token** (not your password): hub.docker.com →
+   **Account Settings** → **Personal access tokens** → **Generate new token**,
+   with **Read & Write** permissions (needed to push images and update the repo
+   description). Copy it — Docker Hub shows it only once.
+2. **Create the Docker Hub repository** `mitchallen/mcp-hello-rust-server`
+   (Public) so the push and the description-sync step have a target.
+3. **Add the two GitHub secrets** — `DOCKERHUB_USERNAME` (your Docker Hub
+   username) and `DOCKERHUB_TOKEN` (the access token):
+
+   ```sh
+   gh secret set DOCKERHUB_USERNAME --body "mitchallen"
+   gh secret set DOCKERHUB_TOKEN          # prompts for the value — paste the token
+   ```
+
+   Or via the web UI: repo **Settings → Secrets and variables → Actions → New
+   repository secret**. Verify with `gh secret list` (values stay hidden).
+
+Without these, the GHCR `publish` job still succeeds; only `publish-dockerhub`
+fails at the login step. Rotate the token by regenerating it on Docker Hub and
+re-running `gh secret set DOCKERHUB_TOKEN`.
+
 * * *
 
 ## Development
