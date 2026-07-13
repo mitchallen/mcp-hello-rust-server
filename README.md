@@ -27,6 +27,21 @@ sandbox. All you need is **[Docker](https://docs.docker.com/get-docker/)** and a
 MCP client — the steps below use **[Claude Code](https://claude.com/claude-code)**
 and the published Docker image (nothing to build or install).
 
+> **Already running the Python [`mcp-hello-server`](../mcp-hello-server)?** It
+> registers under the alias `hello` and exposes the same `server_info` / `greet`
+> tools, so it's easy to mix up with this one — you might test the Python server
+> while thinking you're testing the Rust one. Remove it first so your client only
+> talks to `hello-rust`:
+>
+> ```sh
+> claude mcp list                # see what's registered (look for "hello")
+> claude mcp remove hello        # remove the Python server (its default alias)
+> ```
+>
+> Use `--scope user` / `--scope project` if it was added at that scope, e.g.
+> `claude mcp remove hello --scope user`. In Claude Desktop, delete the `hello`
+> entry from `mcpServers` in `claude_desktop_config.json` instead and restart.
+
 **1. Add the server.** Claude Code launches the container per session and talks
 to it over stdio:
 
