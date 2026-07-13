@@ -1,0 +1,21 @@
+# Rust build output
+/target
+
+# Backtrace / debugging
+*.log
+
+# macOS
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+
+# dotenv
+.env
+.env.*.local

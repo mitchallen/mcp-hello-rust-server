@@ -1,0 +1,21 @@
+name: cargo-audit
+# Scan the Rust dependency tree (Cargo.lock) against the RustSec advisory DB.
+# Trivy's image scan covers the OS layer; this covers the crates compiled into
+# the binary — the two together are the full "are we shipping known vulns?" gate.
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '23 6 * * *' # daily — a new advisory can land against an unchanged lockfile
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit Rust dependencies
+        uses: rustsec/audit-check@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

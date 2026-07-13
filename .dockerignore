@@ -1,0 +1,14 @@
+# Ship only what the build needs (Cargo manifests + src). Everything else is
+# excluded so the build context stays small and reproducible.
+target
+.git
+.gitignore
+.github
+.dockerignore
+Dockerfile
+Makefile
+.claude
+.DS_Store
+# Docs / non-source files (README is not needed at build time here).
+*.md
+tests
