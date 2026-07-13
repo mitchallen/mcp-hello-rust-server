@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       # Build a single-platform (amd64) image into the local daemon so Trivy
       # can scan it. The multi-arch push build (in publish*.yml) reuses this
