@@ -108,11 +108,13 @@ release:
 	next=$$major.$$minor.$$patch; \
 	grep -qE "^## \[$$next\]" CHANGELOG.md || { echo "CHANGELOG.md has no entry for v$$next — add a '## [$$next] - YYYY-MM-DD' section (Keep a Changelog format, top of the file) before releasing."; exit 1; }; \
 	echo "Bumping version $$cur -> $$next..."; \
-	sed -i.bak -E "0,/^version = \"[0-9]+\.[0-9]+\.[0-9]+\"/s//version = \"$$next\"/" Cargo.toml && rm -f Cargo.toml.bak; \
+	awk -v v="$$next" 'BEGIN{done=0} !done && /^version = "[0-9]+\.[0-9]+\.[0-9]+"/ {sub(/"[0-9]+\.[0-9]+\.[0-9]+"/, "\"" v "\""); done=1} {print}' Cargo.toml > Cargo.toml.tmp && mv Cargo.toml.tmp Cargo.toml; \
+	got=$$(grep -m1 '^version' Cargo.toml | sed -E 's/.*"([0-9]+\.[0-9]+\.[0-9]+)".*/\1/'); \
+	test "$$got" = "$$next" || { echo "Version bump failed: Cargo.toml still reads $$got, expected $$next. Aborting before tagging."; exit 1; }; \
 	cargo update -p mcp-hello-rust-server --precise $$next >/dev/null 2>&1 || cargo generate-lockfile; \
 	echo "Releasing v$$next..."; \
 	git add Cargo.toml Cargo.lock; \
-	git commit -m "Release v$$next"; \
+	git commit -m "Release v$$next" || { echo "Nothing to commit for the release bump — refusing to tag a tree that was not bumped."; exit 1; }; \
 	git tag "v$$next"; \
 	git push origin main; \
 	git push origin "v$$next"; \
