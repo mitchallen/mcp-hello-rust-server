@@ -6,6 +6,34 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-08-05
+
+Dependency-refresh release. There are no behavior or API changes — this exists
+so the published images carry the updated dependencies, since a Rust binary
+compiles them in and the previous images were built from the v0.1.0 tree.
+
+### Changed
+
+- **rmcp 2.2 → 3.1** (major). The server and its in-memory test client build and
+  pass against the new SDK with no source changes; only `Cargo.toml` and
+  `Cargo.lock` moved. The minor version bump reflects the major dependency
+  change even though the public tool surface (`server_info`, `greet`) is
+  unchanged.
+- **tokio 1.52.3 → 1.53.1**, plus patch bumps for serde 1.0.228 → 1.0.229,
+  serde_json 1.0.150 → 1.0.151, and anyhow 1.0.103 → 1.0.104.
+- `cargo-audit` reports no known advisories against the updated tree, so this is
+  a freshness release rather than a security fix.
+
+### Added
+
+- A `LICENSE` file, plus Docker/GHCR/license badges in the README.
+
+### Documentation
+
+- Noted the stdio Docker gotchas (no `-p`, no `-t`, and the Docker Hub image
+  reference) and clarified that the image is ~10 MB uncompressed / ~2 MB
+  compressed.
+
 ## [0.1.0] - 2026-07-13
 
 ### Added
