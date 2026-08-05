@@ -19,7 +19,7 @@ path = "src/main.rs"
 # The Rust MCP SDK. `server` + `macros` provide the ServerHandler / #[tool]
 # machinery; `transport-io` is the stdio transport; `transport-streamable-http-server`
 # lets the same binary serve over HTTP (the container default).
-rmcp = { version = "2.2", features = [
+rmcp = { version = "3.1", features = [
     "server",
     "macros",
     "schemars",
@@ -39,7 +39,7 @@ tracing-subscriber = { version = "0.3", features = ["env-filter", "std", "fmt"] 
 # compiled into `cargo build --release`, so the client feature never bloats the
 # shipped binary — it only exists to drive the server in-process from tests
 # (the Rust analog of the Python suite's in-memory FastMCP client).
-rmcp = { version = "2.2", features = ["client"] }
+rmcp = { version = "3.1", features = ["client"] }
 tokio = { version = "1", features = ["full"] }
 
 [profile.release]
