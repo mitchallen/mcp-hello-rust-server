@@ -12,7 +12,7 @@ use std::time::Instant;
 
 use rmcp::{
     handler::server::{router::tool::ToolRouter, wrapper::Parameters},
-    model::{Implementation, ServerCapabilities, ServerInfo},
+    model::{Implementation, ServerCapabilities, ServerConfig},
     schemars, tool, tool_handler, tool_router, ErrorData, Json, ServerHandler,
 };
 use serde::Serialize;
@@ -148,8 +148,8 @@ impl Hello {
 
 #[tool_handler]
 impl ServerHandler for Hello {
-    fn get_info(&self) -> ServerInfo {
-        ServerInfo::new(ServerCapabilities::builder().enable_tools().build())
+    fn get_info(&self) -> ServerConfig {
+        ServerConfig::new(ServerCapabilities::builder().enable_tools().build())
             .with_server_info(Implementation::new(app_name(), APP_VERSION))
             .with_instructions(
                 "A minimal demo MCP server. Use server_info for a health/status check, and \
