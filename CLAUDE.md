@@ -48,6 +48,16 @@ the official MCP "Build a server (Rust)" reference.
   triggers the GHCR + Docker Hub publish workflows. It refuses to run unless the
   tree is clean, you're on `main`, and `CHANGELOG.md` already has the new
   version's section — add that (Keep a Changelog format, top of the file) first.
+- **Branch protection:** `main` requires the `test`, `scan` and `audit` checks
+  (the `ci`, `image-scan` and `cargo-audit` workflows), and the repo has
+  auto-merge enabled. Both were set up on 2026-10-12. Before that `main` was
+  unprotected and auto-merge was disabled, so `dependabot-auto-merge.yml`'s
+  `gh pr merge --auto` merged Dependabot PRs immediately instead of waiting for
+  CI (#25 and #26 landed that way). `gh pr merge --auto` only waits for
+  *required* checks, so keep this list in step with the CI jobs.
+  `enforce_admins` stays **off** on purpose: `make release` pushes the version
+  commit straight to `main`, which admin enforcement would block (expect a
+  "Bypassed rule violations" notice on that push).
 
 ## Tools
 
