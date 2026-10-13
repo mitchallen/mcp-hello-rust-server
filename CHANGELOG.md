@@ -6,8 +6,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-10-13
+
 ### Changed
 
+- `rmcp` 3.5.0 → 3.5.1 and `tokio` 1.53.1 → 1.53.2 (#34), the first grouped
+  minor/patch Dependabot PR. Lockfile only.
 - **Fewer Dependabot PRs.** Each ecosystem (`cargo`, `docker`, `github-actions`)
   now groups its minor + patch bumps into a single weekly PR, and a 7-day
   `cooldown` skips releases until they have settled, so a burst of upstream
@@ -93,7 +97,8 @@ compiles them in and the previous images were built from the v0.1.0 tree.
   Docker base image, and GitHub Actions, with low-risk updates auto-merged once
   CI passes.
 
-[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.1...HEAD
+[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/mitchallen/mcp-hello-rust-server/releases/tag/v0.1.0
