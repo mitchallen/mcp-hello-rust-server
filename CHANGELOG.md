@@ -6,6 +6,26 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-10-13
+
+Dependency-refresh release. There are no behavior or API changes; the tool
+surface (`server_info`, `greet`) is unchanged. It exists so the published images
+pick up the dependency updates below, since a Rust binary compiles them in.
+
+### Changed
+
+- **rmcp 3.1 → 3.5.** The server now returns rmcp's `ServerConfig` from
+  `get_info`, replacing the `ServerInfo` alias that rmcp 3.5 deprecated.
+- **chacha20 0.10.1 → 0.10.2** (transitive, via `rmcp` → `rand`). 0.10.1 was
+  yanked, which `cargo-audit` reported as a warning.
+
+### Fixed
+
+- The `cargo-audit` workflow failed on pushes to `main` and on its daily run with
+  "Resource not accessible by integration". It now has the `checks: write` and
+  `issues: write` permissions it needs to report results. The audit itself
+  found no advisories.
+
 ## [0.2.0] - 2026-08-05
 
 Dependency-refresh release. There are no behavior or API changes — this exists
@@ -64,5 +84,7 @@ compiles them in and the previous images were built from the v0.1.0 tree.
   Docker base image, and GitHub Actions, with low-risk updates auto-merged once
   CI passes.
 
-[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/mitchallen/mcp-hello-rust-server/releases/tag/v0.1.0
