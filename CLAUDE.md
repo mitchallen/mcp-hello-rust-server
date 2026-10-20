@@ -101,3 +101,35 @@ Two complementary gates, both wired into CI and reproducible locally:
 - **Logs go to stderr** (`tracing_subscriber` with `with_writer(stderr)`): the
   stdio transport owns stdout for the JSON-RPC stream, so a stray stdout write
   would corrupt the protocol.
+
+## Releases — lessons from 2026-10-20
+
+- **Is a release due?** Compare `main` against the latest tag and ignore
+  `.github/` and `*.md` — CI and docs changes don't reach the image.
+  `Cargo.lock` changes count: crates are compiled into the static binary, so
+  even a lockfile-only patch (`serde_json` 1.0.151 → 1.0.154, #35) needs a
+  release for the image to carry it — that was v0.2.3. Dependabot auto-merges
+  land on `main` without a release, so a production bump sits unshipped until
+  someone cuts one.
+- **`make release` does not touch the changelog links.** Add the `## [X.Y.Z] -
+  YYYY-MM-DD` section *and* the footer links — point `[unreleased]` at
+  `compare/vX.Y.Z...HEAD` and add `[X.Y.Z]: …/compare/vPREV...vX.Y.Z` — in one
+  `docs: changelog for vX.Y.Z` commit to `main`, then run `make release`. It
+  refuses to run without the section, creates the GitHub Release from it, and
+  the `main` push shows a "Bypassed rule violations" notice (admins are not
+  enforced).
+- **Publish time:** 19–27 min (v0.2.1–v0.2.3), mostly the `linux/arm64` build
+  under QEMU. That's normal. Compare against `gh run list --workflow
+  publish.yml` before treating a slow run as hung.
+- **Verify what shipped, not just the green runs.** `docker buildx imagetools
+  inspect <image>:X.Y.Z` on both registries should list `linux/amd64` and
+  `linux/arm64`. Then `make docker-test TAG=X.Y.Z` pulls the *published* image
+  and runs the MCP `initialize` smoke check, and the reply's `serverInfo` should
+  carry the released version — v0.2.3 replied
+  `{"name":"mcp-hello-rust-server","version":"0.2.3"}`.
+- **The required `scan` check now starts the container** (see above), so a PR
+  whose image builds but won't serve MCP is caught before release, not after.
+- **Sibling conventions differ** — release flows, merge styles and Dependabot
+  schedules vary across the eight active repos in `../`. random-server's
+  CLAUDE.md ("Sibling projects") keeps the comparison; check it, or the
+  sibling's own CLAUDE.md, before porting a fix.
