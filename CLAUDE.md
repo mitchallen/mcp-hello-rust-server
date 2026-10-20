@@ -74,7 +74,9 @@ Supported languages: `english`, `spanish`, `french`, `german`, `italian`,
 
 Two complementary gates, both wired into CI and reproducible locally:
 
-- **`image-scan`** (`make scan`) — Trivy scans the built image and fails on
+- **`image-scan`** (`make scan`) — in CI, first starts the built image and runs
+  `make docker-smoke` (an MCP `initialize`) against it, so an image that builds
+  but crashes at startup fails. Then Trivy scans the built image and fails on
   fixable CRITICAL/HIGH. Covers the OS layer of the runtime image.
 - **`cargo-audit`** — `rustsec/audit-check` scans `Cargo.lock` against the
   RustSec advisory DB. Covers the crates compiled into the binary (which the
