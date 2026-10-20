@@ -6,6 +6,19 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-10-20
+
+Dependency-refresh release; no behavior or API changes. A Rust binary
+compiles its crates in, so the published images need a rebuild to pick these up.
+
+### Changed
+
+- `serde_json` 1.0.151 → 1.0.154 (#35). Lockfile only.
+- CI: `github/codeql-action` 4.38.2 → 4.38.3 (#36).
+- CI: the required `scan` check now starts the built image and runs
+  `make docker-smoke` (an MCP `initialize`) against it, so an image that builds
+  but crashes at startup fails the PR (#37).
+
 ## [0.2.2] - 2026-10-13
 
 ### Changed
@@ -97,7 +110,8 @@ compiles them in and the previous images were built from the v0.1.0 tree.
   Docker base image, and GitHub Actions, with low-risk updates auto-merged once
   CI passes.
 
-[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.2...HEAD
+[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.3...HEAD
+[0.2.3]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.1.0...v0.2.0
