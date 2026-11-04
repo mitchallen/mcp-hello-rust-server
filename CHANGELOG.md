@@ -6,6 +6,19 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-11-04
+
+Automated dependency release; no code changes.
+
+### Changed
+
+- docs: CLAUDE.md release lessons from 2026-10-20 (#38)
+- deps: bump tokio from 1.53.2 to 1.53.3 in the cargo-minor-patch group (#40)
+- ci: bump github/codeql-action from 4.38.3 to 4.39.0 in the actions-minor-patch group (#41)
+- ci: weekly auto-release of bot-merged dependency updates (#42)
+- deps: bump the cargo-minor-patch group with 2 updates (#43)
+- ci: bump github/codeql-action from 4.39.0 to 4.39.1 in the actions-minor-patch group (#44)
+
 ## [0.2.3] - 2026-10-20
 
 Dependency-refresh release; no behavior or API changes. A Rust binary
@@ -110,7 +123,8 @@ compiles them in and the previous images were built from the v0.1.0 tree.
   Docker base image, and GitHub Actions, with low-risk updates auto-merged once
   CI passes.
 
-[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.3...HEAD
+[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.4...HEAD
+[0.2.4]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.0...v0.2.1
