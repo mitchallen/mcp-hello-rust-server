@@ -6,6 +6,14 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.5] - 2026-11-11
+
+Automated dependency release; no code changes.
+
+### Changed
+
+- deps: bump rmcp from 3.7.0 to 3.8.0 in the cargo-minor-patch group (#47)
+
 ## [0.2.4] - 2026-11-04
 
 Automated dependency release; no code changes.
@@ -123,7 +131,8 @@ compiles them in and the previous images were built from the v0.1.0 tree.
   Docker base image, and GitHub Actions, with low-risk updates auto-merged once
   CI passes.
 
-[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.4...HEAD
+[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.5...HEAD
+[0.2.5]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.4...v0.2.5
 [0.2.4]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.1...v0.2.2
