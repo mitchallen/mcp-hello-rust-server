@@ -6,6 +6,18 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.6] - 2026-11-25
+
+Automated dependency release; no code changes.
+
+### Changed
+
+- ci: bump github/codeql-action from 4.39.1 to 4.39.3 in the actions-minor-patch group (#49)
+- Gate dependency resolution at 3 days (#51)
+- deps: bump rmcp from 3.9.0 to 3.10.0 in the cargo-minor-patch group (#52)
+- deps: bump rmcp from 3.10.0 to 3.11.0 in the cargo-minor-patch group (#53)
+- ci: bump github/codeql-action from 4.39.3 to 4.39.4 in the actions-minor-patch group (#54)
+
 ## [0.2.5] - 2026-11-11
 
 Automated dependency release; no code changes.
@@ -131,7 +143,8 @@ compiles them in and the previous images were built from the v0.1.0 tree.
   Docker base image, and GitHub Actions, with low-risk updates auto-merged once
   CI passes.
 
-[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.5...HEAD
+[unreleased]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.6...HEAD
+[0.2.6]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.5...v0.2.6
 [0.2.5]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.4...v0.2.5
 [0.2.4]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/mitchallen/mcp-hello-rust-server/compare/v0.2.2...v0.2.3
